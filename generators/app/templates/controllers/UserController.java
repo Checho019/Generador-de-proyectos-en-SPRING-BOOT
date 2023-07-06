@@ -56,7 +56,7 @@ public class UserController {
 
     @PutMapping("update/{id}")
     public ResponseEntity<User>  updateUser (@PathVariable long id, @RequestBody User user){
-        if (!userRepository.existsById(id)){
+        if (!userxRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
         user.setUserId(id);

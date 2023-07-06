@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="<%= nombreClase %>")
+@Table(name="E<%= nombreClase %>")
 public class <%= nombreClase %> {
 
     private static final Long serialVersionUID = 1L;

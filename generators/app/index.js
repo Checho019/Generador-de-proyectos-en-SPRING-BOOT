@@ -35,23 +35,73 @@ module.exports = class extends Generator {
     
     //console.log(data)
 
+    let appInfo = {
+      nombre: "any",
+      descripcion: "",
+      licencia: "",
+      version: "",
+      group: ""
+    }
+
+    let database = {
+      nombre: "prueba",
+      baseDeDatos: "postgresSQL",
+      usuario: "root",
+      pass: "1234",
+      puerto: 1234,
+      host: "localhost"
+    }
+
     let classData = {
-      nombreClase: "User",
-      ncl:"user",
+      nombreClase: "Casa",
+      ncl:"casa",
       atributos:[
         {
-          nombre:"name",
+          nombre:"direccion",
           tipo:"String"
         },{
-          nombre:"age",
+          nombre:"antiguedad",
           tipo:"int"
         }
       ]
     }
 
+    let relacion = {
+      clase1: "",
+      clase2: "",
+      tipo: ""
+    }
+
+    let modeloDeDatos = {
+      clases: [
+        classData
+      ],
+      relaciones: [
+        relacion
+      ]
+    }
+
+    let aplicacion = {
+      appInfo,
+      database,
+      modeloDeDatos
+    }
+
     this.fs.copyTpl(
       this.templatePath('entities/clase.java'),
       this.destinationPath('entities/' + classData.nombreClase + '.java'),
+      classData
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('controllers/Controller.java'),
+      this.destinationPath('controllers/' + classData.nombreClase + 'Controller.java'),
+      classData
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('repositories/Repository.java'),
+      this.destinationPath('repositories/' + classData.nombreClase + 'Repository.java'),
       classData
     );
   }
