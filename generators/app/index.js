@@ -36,19 +36,18 @@ module.exports = class extends Generator {
     //console.log(data)
 
     let appInfo = {
-      nombre: "any",
-      descripcion: "",
-      licencia: "",
-      version: "",
-      group: ""
+      nombre: "Ejemplo uwu",
+      descripcion: "Un ejemplo generado con yeoman",
+      licencia: "Apache 2.0",
+      version: "1.0.0"
     }
 
     let database = {
       nombre: "prueba",
-      baseDeDatos: "postgresSQL",
+      baseDeDatos: "mariadb",
       usuario: "root",
       pass: "1234",
-      puerto: 1234,
+      puerto: 3306,
       host: "localhost"
     }
 
@@ -87,23 +86,52 @@ module.exports = class extends Generator {
       modeloDeDatos
     }
 
+    let root = "proyecto/src/main/java/com/example/demo/"
+
+    // Generacion de clases, repositorios y controladores
+    
     this.fs.copyTpl(
-      this.templatePath('entities/clase.java'),
-      this.destinationPath('entities/' + classData.nombreClase + '.java'),
+      this.templatePath(root + 'entities/clase.java'),
+      this.destinationPath(root + 'entities/' + classData.nombreClase + '.java'),
       classData
     );
 
     this.fs.copyTpl(
-      this.templatePath('controllers/Controller.java'),
-      this.destinationPath('controllers/' + classData.nombreClase + 'Controller.java'),
+      this.templatePath(root + 'controllers/Controller.java'),
+      this.destinationPath(root + 'controllers/' + classData.nombreClase + 'Controller.java'),
       classData
     );
 
     this.fs.copyTpl(
-      this.templatePath('repositories/Repository.java'),
-      this.destinationPath('repositories/' + classData.nombreClase + 'Repository.java'),
+      this.templatePath(root + 'repositories/Repository.java'),
+      this.destinationPath(root + 'repositories/' + classData.nombreClase + 'Repository.java'),
       classData
     );
+
+
+    // Generacion de archivo de documentacion
+    this.fs.copyTpl(
+      this.templatePath(root + "config/SwaggerConfig.java"),
+      this.destinationPath(root + "config/SwaggerConfig.java"),
+      appInfo
+    );  
+
+    // Generacion de archivo de dependencias
+    this.fs.copyTpl(
+      this.templatePath("proyecto/pom.xml"),
+      this.destinationPath("proyecto/pom.xml"),
+      database
+    )
+
+    // Generacion de archivo de condiguracion de bbdd
+    this.fs.copyTpl(
+      this.templatePath("proyecto/src/main/resources/application.properties"),
+      this.destinationPath("proyecto/src/main/resources/application.properties"),
+      database
+    )
+
+    
+
   }
 
   
