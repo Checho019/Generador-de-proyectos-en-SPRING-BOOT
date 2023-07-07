@@ -30,9 +30,19 @@
 
 		<!-- DB CONTROLLER -->
 		<dependency>
+		<% if (baseDeDatos == "mariadb") { %>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>3.1.2</version>
+		<% } else if (baseDeDatos == "postgresql") { %>
+			<groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+		<% } else if (baseDeDatos == "mysql") { %>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.18</version>
+		<% } %>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
