@@ -5,94 +5,14 @@ module.exports = class extends Generator {
 
   writing() {
 
-    //console.log(this.options.data)
-    //console.log(this.options.data.replace(/'/g,"\""))
-    //const data = JSON.parse(this.options.data.replace(/'/g,"\""))
+    console.log("Yeoman ------------------------------------")
+    const data = JSON.parse(this.options.data.replace(/'/g,"\""))
     
-    //console.log(data)
+    console.log(data)
 
-    let appInfo = {
-      nombre: "Ejemplo uwu",
-      descripcion: "Un ejemplo generado con yeoman",
-      licencia: "Apache 2.0",
-      version: "1.0.0"
-    }
-
-    let database = {
-      nombre: "prueba",
-      baseDeDatos: "postgresql",
-      usuario: "postgres",
-      pass: "postgres2022",
-      puerto: 5432,
-      host: "localhost"
-    }
-
-    let classData1 = {
-      nombreClase: "Casa",
-      ncl:"casa",
-      atributos:[
-        {
-          nombre:"direccion",
-          tipo:"String"
-        },{
-          nombre:"antiguedad",
-          tipo:"int"
-        }
-      ]
-    }
-
-    let classData2 = {
-      nombreClase: "Persona",
-      ncl:"persona",
-      atributos:[
-        {
-          nombre:"nombre",
-          tipo:"String"
-        },{
-          nombre:"edad",
-          tipo:"int"
-        }
-      ]
-    }
-
-    let classData3 = {
-      nombreClase: "Mascota",
-      ncl:"mascota",
-      atributos:[
-        {
-          nombre:"nombre",
-          tipo:"String"
-        },{
-          nombre:"edad",
-          tipo:"int"
-        }
-      ]
-    }
-
-    let relacion = {
-      clase1: "",
-      clase2: "",
-      tipo: ""
-    }
-
-    let modeloDeDatos = {
-      clases: [
-        classData1,
-        classData2,
-        classData3
-      ],
-      relaciones: [
-        relacion
-      ]
-    }
-
-    let aplicacion = {
-      appInfo,
-      database,
-      modeloDeDatos
-    }
-
+    let {appInfo, database, modeloDeDatos} = data
     let {clases} = modeloDeDatos
+
     let root = "proyecto/src/main/java/com/example/demo/"
 
     // Generacion de clases, repositorios y controladores
@@ -173,8 +93,7 @@ module.exports = class extends Generator {
       this.destinationPath("proyecto/mvnw.cmd"),
       null
     )
-
   }
-
+  
   
 };
